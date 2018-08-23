@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  resources :cards
-  resources :comments
+  
+  resources :cards do
+    resources :comments
+  end
+
+  resources :comments do
+    resources :comments
+  end
+  
   resources :lists
   devise_for :users,
   path: '',
