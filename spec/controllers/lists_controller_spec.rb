@@ -25,12 +25,12 @@ require 'rails_helper'
 
 RSpec.describe ListsController, type: :controller do
 
-  
+  # let(:list) { FactoryBot.create(:list) }
   # This should return the minimal set of attributes required to create a valid
   # List. As you add validations to List, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {"title" => Faker::Lorem.characters(12)}
   }
 
   let(:invalid_attributes) {
