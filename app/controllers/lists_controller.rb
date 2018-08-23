@@ -10,6 +10,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
+    #TODO return list with cards
     render json: @list
   end
 
@@ -37,6 +38,8 @@ class ListsController < ApplicationController
   def destroy
     @list.destroy
   end
+
+  #TODO un/assign members
 
   private
     # Use callbacks to share common setup or constraints between actions.
