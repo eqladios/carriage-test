@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     sessions: 'sessions',
     registrations: 'registrations'
   }
-
+  get '/users/index', to: 'users#index'
   root to: "static_pages#index"
 end

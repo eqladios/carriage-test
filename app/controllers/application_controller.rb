@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::API
+    def json_response(object, status = :ok)
+        render json: object, status: status
+    end
+
     def render_resource(resource)
         if resource.errors.empty?
           render json: resource
