@@ -4,10 +4,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :comments do
+  resources :comments, except: [ :index ] do
     resources :comments
   end
-  
+
   resources :lists
   devise_for :users,
   path: '',

@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_commentable, only: [:index]
 
-  # GET /comments
+  # GET /commentable/:commentable_id/comments]
   def index
-    @comments = Comment.all
+    @comments = @commentable.comments #TODO Pagination
 
     render json: @comments
   end
@@ -42,6 +43,11 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
+    end
+
+    def set_commentable
+      @commentable = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
+      @commentable = Card.find_by_id(params[:card_id]) if params[:card_id]
     end
 
     # Only allow a trusted parameter "white list" through.
