@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :update, :destroy]
+  before_action :set_card, only: [:update, :destroy]
 
   # GET /cards
   def index
@@ -10,7 +10,10 @@ class CardsController < ApplicationController
 
   # GET /cards/1
   def show
-    render json: @card
+    # TODO there might be a smarter way
+    @card = Card.find(params[:id])
+    @first_three_comments = @card.comments.limit(3)
+    render json: [@card, :first_three_comments => @first_three_comments]
   end
 
   # POST /cards
