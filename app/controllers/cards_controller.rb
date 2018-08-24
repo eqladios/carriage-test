@@ -3,7 +3,7 @@ class CardsController < ApplicationController
 
   # GET /cards
   def index
-    @cards = Card.all
+    @cards = Card.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
 
     render json: @cards
   end
