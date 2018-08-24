@@ -21,5 +21,8 @@ Rails.application.routes.draw do
     registrations: 'registrations'
   }
   get '/users/index', to: 'users#index'
+  post '/lists/:id/users/:user_id', to: 'lists#assign'
+  delete '/lists/:id/users/:user_id', to: 'lists#unassign'
+
   root to: "static_pages#index"
 end
