@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: JWTBlacklist
   enum role: [:admin, :member]
-
+  has_many :memberships
+  has_many :lists, through: :memberships
 end
