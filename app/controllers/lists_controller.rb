@@ -10,8 +10,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    #TODO return list with cards
-    render json: @list
+    render json: @list, :include => :cards
   end
 
   # POST /lists
