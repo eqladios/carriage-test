@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :update, :destroy]
-  before_action :set_commentable, only: [:index]
+  before_action :set_commentable, only: [:index, :create]
 
-  # GET /commentable/:commentable_id/comments]
+  # GET /:commentable/:commentable_id/comments
   def index
     @comments = @commentable.comments #TODO Pagination
 
@@ -14,9 +14,9 @@ class CommentsController < ApplicationController
     render json: @comment, :include => :comments
   end
 
-  # POST /comments
+  # POST /:commentable/:commentable_id/comments
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @commentable.comments.new(comment_params)
 
     if @comment.save
       render json: @comment, status: :created, location: @comment
