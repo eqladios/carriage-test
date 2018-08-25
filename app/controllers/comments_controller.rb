@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :update, :destroy]
   before_action :set_commentable, only: [:index, :create]
-  load_and_authorize_resource :comment
+  load_resource :comment
+  load_resource :card
+  load_and_authorize_resource :comment, through: [:comment, :card]
+
   
   # GET /:commentable/:commentable_id/comments
   def index
@@ -19,7 +22,7 @@ class CommentsController < ApplicationController
     if current_user.member? and !current_user.lists.include?(@commentable.list)
       raise CanCan::AccessDenied.new("Not authorized!", :create, Comment)
     end
-    
+
     @comment = @commentable.comments.new(comment_params)
 
     @comment.user = current_user
