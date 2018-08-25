@@ -16,6 +16,7 @@ gem 'puma', '~> 3.7'
 gem 'devise-jwt'
 gem 'will_paginate', '~> 3.1.0'
 gem 'api-pagination'
+gem 'cancancan', '~> 2.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

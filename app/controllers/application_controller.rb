@@ -23,4 +23,9 @@ class ApplicationController < ActionController::API
             ]
         }, status: :bad_request
     end
+    
+    include CanCan::ControllerAdditions
+    rescue_from CanCan::AccessDenied do |exception|
+        render json: {}, status: 401, message: "Access Denied"
+    end
 end
