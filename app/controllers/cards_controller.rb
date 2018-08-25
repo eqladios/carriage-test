@@ -1,6 +1,8 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :update, :destroy]
   before_action :set_list, only: [:index, :create]
+  load_and_authorize_resource :list
+  load_and_authorize_resource :card, through: :list
 
   # GET lists/:list_id/cards
   def index
