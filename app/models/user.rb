@@ -7,4 +7,6 @@ class User < ApplicationRecord
   enum role: [:admin, :member]
   has_many :memberships
   has_many :lists, through: :memberships
+  has_many :cards
+  has_many :comments
 end
