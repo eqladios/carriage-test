@@ -4,9 +4,8 @@ class CommentsController < ApplicationController
 
   # GET /:commentable/:commentable_id/comments
   def index
-    @comments = @commentable.comments #TODO Pagination
-
-    render json: @comments
+    @comments = @commentable.comments
+    paginate json: @comments, per_page: 10
   end
 
   # GET /comments/1

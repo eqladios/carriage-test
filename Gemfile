@@ -14,6 +14,9 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 #a devise extension that uses JWT tokens for user authentication
 gem 'devise-jwt'
+gem 'will_paginate', '~> 3.1.0'
+gem 'api-pagination'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
