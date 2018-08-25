@@ -6,10 +6,10 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     if user.admin?
-      can [:create, :read,:update, :destroy], List
-      # can [:update, :destroy], List do |list|
-      #   list.users.include?(user.id)
-      # end
+      can [:create, :read], [List, Card, Comment]
+      can [:update, :destroy], List do |list|
+        list.users.include?(user)
+      end
     end
     #
     # The first argument to `can` is the action you are giving the user
