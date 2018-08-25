@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   }
   
   get '/users/index', to: 'users#index'
-  post '/lists/:id/users/:user_id', to: 'lists#assign'
+  post '/lists/:id/users/', to: 'lists#assign'
   delete '/lists/:id/users/:user_id', to: 'lists#unassign'
 
   root to: "static_pages#index"
