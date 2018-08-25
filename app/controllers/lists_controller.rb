@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :update, :destroy, :assign, :unassign]
-
+  load_and_authorize_resource
   # GET /lists
   def index
     @lists = List.all
