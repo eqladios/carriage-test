@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     paginate json: @comments, per_page: 10
   end
 
-  # GET /comments/1
+  # GET /:commentable/:commentable_id/comments/1
   def show
     render json: @comment, :include => :comments
   end
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1
+  # PATCH/PUT /:commentable/:commentable_id/comments/1
   def update
     if @comment.update(comment_params)
       render json: @comment
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
+  # DELETE /:commentable/:commentable_id/comments/1
   def destroy
     @comment.destroy
   end
@@ -51,6 +51,6 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:content,:comment_id,:card_id)
     end
 end

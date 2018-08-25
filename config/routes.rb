@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :comments, except: [:index] do
+  resources :comments, except: [:index, :show, :create, :update, :destroy] do
     resources :comments
   end
 
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     sessions: 'sessions',
     registrations: 'registrations'
   }
+  
   get '/users/index', to: 'users#index'
   post '/lists/:id/users/:user_id', to: 'lists#assign'
   delete '/lists/:id/users/:user_id', to: 'lists#unassign'
