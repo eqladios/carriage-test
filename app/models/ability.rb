@@ -30,7 +30,18 @@ class Ability
       
       can [:manage], Card
 
-      
+      can [:read], Comment do |comment|
+        user.lists.include?(comment.list)
+      end
+
+      can [:update], Comment, user_id: user.id 
+
+      can [:destroy], Comment do |comment|
+        @reply_on_own_comment = comment.commentable.is_a?(Comment) and comment.commentable.user == user
+        comment.user == user or @reply_on_own_comment
+      end
+
+      can [:create], Comment #Check hard-coded in Create method
 
     end
 
