@@ -18,9 +18,14 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
 
     if @list.save
-      render json: @list, status: :created, location: @list
-    else
-      render json: @list.errors, status: :unprocessable_entity
+      @list.users << current_user
+      @membership = @list.memberships.first
+      @membership.owner = "true"
+      if @membership.save
+        render json: @list, status: :created, location: @list
+      else
+        render json: @list.errors, status: :unprocessable_entity
+      end
     end
   end
 
