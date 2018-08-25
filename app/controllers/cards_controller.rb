@@ -1,24 +1,24 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:update, :destroy]
+  before_action :set_card, only: [:show, :update, :destroy]
+  before_action :set_list, only: [:index, :create]
 
-  # GET /cards
+  # GET lists/:list_id/cards
   def index
-    @cards = Card.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
+    @cards = @list.cards.left_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
 
     render json: @cards
   end
 
-  # GET /cards/1
+  # GET lists/:list_id/cards/1
   def show
     # TODO there might be a smarter way
-    @card = Card.find(params[:id])
     @first_three_comments = @card.comments.limit(3)
-    render json: [@card, :first_three_comments => @first_three_comments]
+    render json: [@card, @first_three_comments]
   end
 
-  # POST /cards
+  # POST lists/:list_id/cards
   def create
-    @card = Card.new(card_params)
+    @card = @list.cards.new(card_params)
 
     if @card.save
       render json: @card, status: :created, location: @card
@@ -27,7 +27,7 @@ class CardsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cards/1
+  # PATCH/PUT lists/:list_id/cards/1
   def update
     if @card.update(card_params)
       render json: @card
@@ -36,7 +36,7 @@ class CardsController < ApplicationController
     end
   end
 
-  # DELETE /cards/1
+  # DELETE lists/:list_id/cards/1
   def destroy
     @card.destroy
   end
@@ -47,8 +47,12 @@ class CardsController < ApplicationController
       @card = Card.find(params[:id])
     end
 
+    def set_list
+      @list = List.find(params[:list_id])
+    end
+
     # Only allow a trusted parameter "white list" through.
     def card_params
-      params.require(:card).permit(:title, :description)
+      params.require(:card).permit(:title, :description, :list_id)
     end
 end
