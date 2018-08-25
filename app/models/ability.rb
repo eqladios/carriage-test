@@ -6,6 +6,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.admin?
+      
       can [:create, :read], [List, Card, Comment]
 
       can [:update, :destroy, :assign, :unassign], List do |list|
@@ -18,7 +19,7 @@ class Ability
       end
 
       can [:update, :destroy], Comment do |comment|
-        comment.user == user #TODO or
+        comment.user == user or user.lists.include?(comment.list)
       end
 
     end

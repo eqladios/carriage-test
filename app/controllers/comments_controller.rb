@@ -17,7 +17,11 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
-
+    if @commentable.is_a?(Card)
+      @comment.list = @commentable.list
+    elsif @commentable.is_a?(Comment)
+      @comment.list = @commentable.card.list
+    end
     if @comment.save
       render json: @comment, status: :created
     else
