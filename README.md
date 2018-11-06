@@ -5,7 +5,8 @@ The application is simply a group of lists that contain cards, cards have commen
 The API contains:
 + CRUD actions for all resources
 + Authentication endpoints with Devise and JWT 
-+ Pagination +Reddit-like comments system done with polymorphic associations 
++ Pagination 
++ Reddit-like comments system done with polymorphic associations 
 + Authorization using CanCanCan 
 + Testing with Rspec, Faker and FactoryBot
 
